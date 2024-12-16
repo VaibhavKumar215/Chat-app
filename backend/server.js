@@ -7,8 +7,7 @@ import messageRouter from './routes/messageRoutes.js'
 import userRouter from './routes/userRoutes.js';
 
 import {connectDB} from './database/db.js'
-
-const app = express();
+import { app,server } from './socket/socket.js';
 
 dotenv.config()
 const PORT = process.env.PORT || 3001
@@ -23,6 +22,6 @@ app.use('/api/auth',authRouter)
 app.use('/api/messages',messageRouter)
 app.use('/api/users',userRouter)
 
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     connectDB();
     console.log(`http://localhost:${PORT}`)})

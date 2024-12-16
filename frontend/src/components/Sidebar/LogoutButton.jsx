@@ -1,11 +1,24 @@
-import React from 'react'
-import logout from '../../assets/logout-02-stroke-rounded.svg'
-const LogoutButton = () => {
-  return (
-    <div className='mt-auto'>
-        <img src={logout} alt="" className='cursor-pointer'/>
-    </div>
-  )
-}
+import React from 'react';
+import assets from '../../assets/assets';
+import userLogout from '../../Hook/userLogout';
 
-export default LogoutButton
+const LogoutButton = () => {
+  const { loading, logout } = userLogout();
+
+  return (
+    <div className="mt-auto">
+      {!loading ? (
+        <img
+          src={assets.logoutButton}
+          alt="Logout"
+          onClick={logout}
+          className="cursor-pointer"
+        />
+      ) : (
+        <span className="loading loading-spinner" aria-label="Logging out..."></span>
+      )}
+    </div>
+  );
+};
+
+export default LogoutButton;

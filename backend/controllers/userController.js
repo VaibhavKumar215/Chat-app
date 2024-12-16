@@ -2,12 +2,12 @@ import User from "../models/userModel.js";
 
 const getUsers = async(req,res)=>{
     try {
-        // const loggedInUserId = req.user._id;
+        const loggedInUserId = req.user._id;
 
-        // const filteredUser = await User.find({_id: {$ne: loggedInUserId}})
-        const allUser = await User.find()
+        const filteredUsers = await User.find({_id: {$ne: loggedInUserId}})
+        // const allUser = await User.find()
 
-        res.status(200).json({allUser})
+        res.status(200).json(filteredUsers)
 
     } catch (error) {
         console.log("Error in getUser: ", error.message);
