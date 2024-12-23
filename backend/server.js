@@ -20,13 +20,6 @@ const __dirname = path.resolve()
 app.use(express.json()) //to parse the incomming request with JSON payloads(from req.body)
 app.use(cookieParser())
 
-// Static is a middleware function provided by the express library that serves static files, such as HTML, CSS, JavaScript, and images, from a specified directory.
-app.use(express.static(path.join(__dirname,"/frontend/dist")))
-
-app.get("*",(req,res)=>{
-    res.sendFile(path.join(__dirname,'frontend','dist','index.html'))
-})
-
 // app.get("/",(req,res)=>{
 //     res.send("Hello")
 // })
@@ -34,6 +27,14 @@ app.get("*",(req,res)=>{
 app.use('/api/auth',authRouter)
 app.use('/api/messages',messageRouter)
 app.use('/api/users',userRouter)
+
+
+// Static is a middleware function provided by the express library that serves static files, such as HTML, CSS, JavaScript, and images, from a specified directory.
+app.use(express.static(path.join(__dirname,"/frontend/dist")))
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+});
 
 server.listen(PORT,()=>{
     connectDB();
